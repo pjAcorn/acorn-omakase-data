@@ -4,7 +4,6 @@ from flask_cors import CORS
 PORT_NUM = 8000
 
 app = Flask(__name__)
-CORS(app, resources={r'*': {'origins': 'http://localhost:3000'}})
 
 @app.route("/test", methods=['POST'])
 def test():

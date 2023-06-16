@@ -2,7 +2,7 @@ import requests
 import pprint
 import json
 from bs4 import BeautifulSoup
-import pandas as pd
+# import pandas as pd
 
 # 인증키
 encodingKey = "e%2BhnMTtUR6KCEeT0JaUw91rq9kQKnCDlWy5kQug3YNpYGx0gHDpQN6dMtNV7IfFt9irWjAbV60gDoq827vCPgQ%3D%3D"
@@ -22,12 +22,22 @@ response = requests.get(url, params=params)
 # 예쁘게 출력하기
 
 soup = BeautifulSoup(response.text, "html.parser")
+# print(soup)
 
-list = []
-for item in soup.find_all("item"):
-    overcrowding = item.find("과밀지수").text
-    name = item.find("상권명칭").text
-    list.append([overcrowding, name])
+strSoup = str(soup)
+strSoup = strSoup[27:]
+splitList = strSoup.split("}")
 
-city_df = pd.DataFrame(list, columns= ["overcrowding", "name"])
-city_df.head()
+for s in splitList:
+    print(s.lstrip("{"))
+
+# list = []
+# for item in soup.find_all("item"):
+#     overcrowding = item.find("과밀지수").text
+#     name = item.find("상권명칭").text
+#     list.append([overcrowding, name])
+
+
+# print(list)
+# city_df = pd.DataFrame(list, columns= ["overcrowding", "name"])
+# city_df.head()
